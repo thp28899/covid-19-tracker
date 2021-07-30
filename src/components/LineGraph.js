@@ -8,10 +8,10 @@ function LineGraph({ casesType }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=120')
+      await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=60')
         .then((response) => response.json())
         .then((data) => {
-          console.log('pppppp', data);
+          // console.log('pppppp', data);
           const chartData = buildChartData(data, casesType);
           setData(chartData);
         });
@@ -39,51 +39,6 @@ function LineGraph({ casesType }) {
 
     return chartData;
   };
-
-  // const options = {
-  //   legend: {
-  //     display: false,
-  //   },
-  //   elements: {
-  //     point: {
-  //       radius: 0,
-  //     },
-  //   },
-  //   maintainAspectRatio: false,
-  //   tooltips: {
-  //     mode: 'index',
-  //     intersect: false,
-  //     callbacks: {
-  //       label: function (tooltipItem) {
-  //         return numeral(tooltipItem.value).format('+0,0');
-  //       },
-  //     },
-  //   },
-  //   scales: {
-  //     xAxes: [
-  //       {
-  //         type: 'time',
-  //         time: {
-  //           format: 'DD/MM/YY',
-  //           tooltipFormat: 'll',
-  //         },
-  //       },
-  //     ],
-  //     yAxes: [
-  //       {
-  //         gridLines: {
-  //           display: false,
-  //         },
-  //         ticks: {
-  //           // include a dollar sign in the ticks
-  //           callback: function (value, index, values) {
-  //             return numeral(value).format('0a');
-  //           },
-  //         },
-  //       },
-  //     ],
-  //   },
-  // };
 
   return (
     <div>
