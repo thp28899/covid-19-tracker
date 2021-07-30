@@ -6,7 +6,7 @@ import {
   Card,
   CardContent,
 } from '@material-ui/core';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import InfoBox from './components/InfoBox';
 import Map from './components/Map';
 import Table from './components/Table';
