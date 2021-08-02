@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-moment';
 
-function LineGraph({ casesType }) {
+function LineGraph({ casesType, days }) {
   const [data, setData] = useState([]);
 
   const colorCasesType =
@@ -14,7 +14,9 @@ function LineGraph({ casesType }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=60')
+      await fetch(
+        `https://disease.sh/v3/covid-19/historical/all?lastdays=${days}`
+      )
         .then((response) => response.json())
         .then((data) => {
           // console.log('pppppp', data);
@@ -24,7 +26,7 @@ function LineGraph({ casesType }) {
     };
 
     fetchData();
-  }, [casesType]);
+  }, [casesType, days]);
 
   const buildChartData = (data, casesType) => {
     const chartData = [];

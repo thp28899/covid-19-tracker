@@ -27,6 +27,9 @@ function App() {
   const countryCtx = useContext(CountryContext);
   const [casesType, setCasesType] = useState('cases');
 
+  const [days, setDays] = useState('30');
+  const daysAvail = ['30', '60', '120', 'all'];
+
   useEffect(() => {
     const getWorldwideData = async () => {
       await fetch(`${baseUrl}all`)
@@ -79,9 +82,12 @@ function App() {
           lat: data.countryInfo?.lat || 24.80746,
           lng: data.countryInfo?.long || 0.4796,
         });
-        data.countryInfo ? setMapZoom(4) : setMapZoom(2);
 
-        data.country && countryCtx.selectCountry(data.country);
+        countryCode === 'worldwide' ? setMapZoom(2) : setMapZoom(4);
+
+        data.country
+          ? countryCtx.selectCountry(data.country)
+          : countryCtx.selectCountry('worldwide');
       });
   };
 
@@ -151,11 +157,27 @@ function App() {
 
         <Card className="app__right">
           <CardContent className="app__right__content">
-            <h3>Live cases by country</h3>
+            <h4>All cases recorded by country</h4>
             <Table countries={tableData} />
 
-            <h3>Worldwide new {casesType}</h3>
-            <LineGraph casesType={casesType} />
+            <div className="app__right__cta">
+              <h4>Worldwide new {casesType} last</h4>
+              <FormControl>
+                <Select
+                  value={days}
+                  onChange={(event) => setDays(event.target.value)}
+                >
+                  {daysAvail.map((da) => (
+                    <MenuItem value={da} key={da}>
+                      {da}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <h4>days</h4>
+            </div>
+
+            <LineGraph casesType={casesType} days={days} />
           </CardContent>
         </Card>
       </div>
