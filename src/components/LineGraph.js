@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-moment';
-// import numeral from 'numeral';
 
 function LineGraph({ casesType }) {
   const [data, setData] = useState([]);
+
+  const colorCasesType =
+    casesType === 'cases'
+      ? '#cc1034'
+      : casesType === 'deaths'
+      ? 'gray'
+      : '#478604';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,8 +52,8 @@ function LineGraph({ casesType }) {
         data={{
           datasets: [
             {
-              backgroundColor: 'rgba(204, 16, 52, 0.5)',
-              borderColor: '#cc1034',
+              backgroundColor: colorCasesType,
+              borderColor: colorCasesType,
               data: data,
             },
           ],

@@ -24,7 +24,11 @@ function Map(props) {
           zoom={props.zoom}
         >
           {props.countries.map((country) => (
-            <DataOnMap country={country} casesType="cases" />
+            <DataOnMap
+              country={country}
+              casesType={props.casesType}
+              key={country.country}
+            />
           ))}
         </GoogleMap>
       </CardContent>

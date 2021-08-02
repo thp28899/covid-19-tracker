@@ -1,7 +1,8 @@
-import React from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Circle, InfoWindow } from '@react-google-maps/api';
 import numeral from 'numeral';
 import './DataOnMap.css';
+import CountryContext from '../utils';
 
 const circleVisual = {
   cases: {
@@ -19,15 +20,13 @@ const circleVisual = {
 };
 
 function DataOnMap(props) {
-  const [infoWindowState, setInfoWindowState] = React.useState(false);
+  const [infoWindowState, setInfoWindowState] = useState(false);
 
-  const closeClickHandler = () => {
-    setInfoWindowState(false);
-  };
-
-  const circleClickHandler = () => {
-    setInfoWindowState(true);
-  };
+  const countryCtx = useContext(CountryContext);
+  useEffect(() => {
+    countryCtx.selectedCountry === props.country.country &&
+      setInfoWindowState(true);
+  }, [countryCtx.selectedCountry, props.country.country]);
 
   return (
     <div>
@@ -55,7 +54,7 @@ function DataOnMap(props) {
               : 15000,
           zIndex: 1,
         }}
-        onClick={circleClickHandler}
+        onClick={() => setInfoWindowState(true)}
       />
 
       {infoWindowState && (
@@ -64,7 +63,7 @@ function DataOnMap(props) {
             lat: props.country.countryInfo.lat,
             lng: props.country.countryInfo.long,
           }}
-          onCloseClick={closeClickHandler}
+          onCloseClick={() => setInfoWindowState(false)}
         >
           <div className="info-container">
             <div
