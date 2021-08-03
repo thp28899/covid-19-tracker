@@ -30,7 +30,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex: 1;
+  flex-grow: 1;
+}
+
+.app__right__da {
+  display: flex;
+  justify-content: space-between;
 }
 
 .app__header {
@@ -59,9 +64,4 @@ body {
   text-align: right;
   margin-bottom: 10px;
   margin-right: 10px;
-}
-
-.app__right__cta {
-  display: flex;
-  justify-content: space-between;
 }

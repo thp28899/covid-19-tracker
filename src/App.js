@@ -160,8 +160,8 @@ function App() {
             <h4>All cases recorded by country</h4>
             <Table countries={tableData} />
 
-            <div className="app__right__cta">
-              <h4>Worldwide new {casesType} last</h4>
+            <div className="app__right__da">
+              <h4>Worldwide new {casesType}</h4>
               <FormControl>
                 <Select
                   value={days}
@@ -169,12 +169,11 @@ function App() {
                 >
                   {daysAvail.map((da) => (
                     <MenuItem value={da} key={da}>
-                      {da}
+                      {da} days
                     </MenuItem>
                   ))}
                 </Select>
               </FormControl>
-              <h4>days</h4>
             </div>
 
             <LineGraph casesType={casesType} days={days} />
