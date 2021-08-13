@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-moment';
+import './LineGraph.css';
 
 function LineGraph({ casesType, days }) {
   const [data, setData] = useState([]);
@@ -49,7 +50,7 @@ function LineGraph({ casesType, days }) {
   };
 
   return (
-    <div>
+    <div className="graph">
       <Line
         data={{
           datasets: [
@@ -61,6 +62,8 @@ function LineGraph({ casesType, days }) {
           ],
         }}
         options={{
+          responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: {
               display: false,
