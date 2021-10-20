@@ -12,7 +12,7 @@ const containerStyle = {
 function Map(props) {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyCc-EsvzIi-fvx3sZLYUML659aIzodUQhE',
+    googleMapsApiKey: '',
   });
 
   return isLoaded ? (
