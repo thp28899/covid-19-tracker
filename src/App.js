@@ -10,7 +10,7 @@ import { useState, useEffect, useContext } from 'react';
 import InfoBox from './components/InfoBox';
 import Map from './components/Map';
 import Table from './components/Table';
-import { sortData, prettyPrintStat, prettyPrintStatTotal } from './utils';
+import { sortData, prettyPrintStat } from './utils';
 import LineGraph from './components/LineGraph';
 import CountryContext from './utils';
 
@@ -124,7 +124,7 @@ function App() {
             <InfoBox
               title="Coronavirus cases"
               cases={prettyPrintStat(countryInfo.todayCases)}
-              total={prettyPrintStatTotal(countryInfo.cases)}
+              total={prettyPrintStat(countryInfo.cases).split('+')[1]}
               onClick={() => setCasesType('cases')}
               active={casesType === 'cases'}
               casesType="cases"
@@ -132,7 +132,7 @@ function App() {
             <InfoBox
               title="Recovered"
               cases={prettyPrintStat(countryInfo.todayRecovered)}
-              total={prettyPrintStatTotal(countryInfo.recovered)}
+              total={prettyPrintStat(countryInfo.recovered).split('+')[1]}
               onClick={() => setCasesType('recovered')}
               active={casesType === 'recovered'}
               casesType="recovered"
@@ -140,7 +140,7 @@ function App() {
             <InfoBox
               title="Deaths"
               cases={prettyPrintStat(countryInfo.todayDeaths)}
-              total={prettyPrintStatTotal(countryInfo.deaths)}
+              total={prettyPrintStat(countryInfo.deaths).split('+')[1]}
               onClick={() => setCasesType('deaths')}
               active={casesType === 'deaths'}
               casesType="deaths"
