@@ -1,7 +1,13 @@
 .map__card {
   margin-top: 16px;
+  padding-bottom: 35px;
 }
 
 .map {
-  height: 500px;
+  height: 550px;
+}
+
+.map__head {
+  display: flex;
+  justify-content: space-between;
 }

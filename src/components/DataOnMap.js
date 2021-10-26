@@ -7,11 +7,11 @@ import CountryContext from '../utils';
 const circleVisual = {
   cases: {
     hex: '#cc1034',
-    multiplier: 0.06,
+    multiplier: 0.03,
   },
   recovered: {
     hex: '#7dd71d',
-    multiplier: 0.04,
+    multiplier: 0.03,
   },
   deaths: {
     hex: '#c0c0c0',
@@ -29,33 +29,35 @@ function DataOnMap(props) {
   }, [countryCtx.selectedCountry, props.country.country]);
 
   return (
-    <div>
-      <Circle
-        center={{
-          lat: props.country.countryInfo.lat,
-          lng: props.country.countryInfo.long,
-        }}
-        options={{
-          strokeColor: circleVisual[props.casesType].hex,
-          strokeOpacity: 0.9,
-          strokeWeight: 2,
-          fillColor: circleVisual[props.casesType].hex,
-          fillOpacity: 0.35,
-          clickable: true,
-          draggable: false,
-          editable: false,
-          visible: true,
-          radius:
-            props.country[props.casesType] *
-              circleVisual[props.casesType].multiplier >
-            15000
-              ? props.country[props.casesType] *
-                circleVisual[props.casesType].multiplier
-              : 15000,
-          zIndex: 1,
-        }}
-        onClick={() => setInfoWindowState(true)}
-      />
+    <>
+      {props.mapDrawingsMode === 'circle' && (
+        <Circle
+          center={{
+            lat: props.country.countryInfo.lat,
+            lng: props.country.countryInfo.long,
+          }}
+          options={{
+            strokeColor: circleVisual[props.casesType].hex,
+            strokeOpacity: 0.9,
+            strokeWeight: 2,
+            fillColor: circleVisual[props.casesType].hex,
+            fillOpacity: 0.35,
+            clickable: true,
+            draggable: false,
+            editable: false,
+            visible: true,
+            radius:
+              props.country[props.casesType] *
+                circleVisual[props.casesType].multiplier >
+              15000
+                ? props.country[props.casesType] *
+                  circleVisual[props.casesType].multiplier
+                : 15000,
+            zIndex: 1,
+          }}
+          onClick={() => setInfoWindowState(true)}
+        />
+      )}
 
       {infoWindowState && (
         <InfoWindow
@@ -89,7 +91,7 @@ function DataOnMap(props) {
           </div>
         </InfoWindow>
       )}
-    </div>
+    </>
   );
 }
 

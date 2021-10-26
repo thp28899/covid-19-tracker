@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import './Map.css';
-import { Card, CardContent } from '@material-ui/core';
+import {
+  Card,
+  CardContent,
+  FormControl,
+  RadioGroup,
+  Radio,
+  FormControlLabel,
+} from '@material-ui/core';
 import DataOnMap from './DataOnMap';
 
 const containerStyle = {
@@ -10,6 +17,7 @@ const containerStyle = {
 };
 
 function Map(props) {
+  const [mapDrawingsMode, setMapDrawingsMode] = useState('circle');
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: '',
@@ -18,6 +26,27 @@ function Map(props) {
   return isLoaded ? (
     <Card className="map__card">
       <CardContent className="map">
+        <div className="map__head">
+          <FormControl>
+            <RadioGroup
+              row
+              value={mapDrawingsMode}
+              onChange={(event) => setMapDrawingsMode(event.target.value)}
+            >
+              <FormControlLabel
+                value="circle"
+                control={<Radio color="primary" />}
+                label="Circle"
+              />
+              <FormControlLabel
+                value="none"
+                control={<Radio color="primary" />}
+                label="None"
+              />
+            </RadioGroup>
+          </FormControl>
+        </div>
+
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={props.center}
@@ -28,6 +57,7 @@ function Map(props) {
               country={country}
               casesType={props.casesType}
               key={country.country}
+              mapDrawingsMode={mapDrawingsMode}
             />
           ))}
         </GoogleMap>
