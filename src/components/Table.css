@@ -1,8 +1,10 @@
 .table {
-  margin-top: 20px;
+  margin-bottom: 15px;
+  margin-top: 10px;
   overflow: scroll;
-  height: 400px;
+  height: 450px;
   color: #6a5d5d;
+  display: block;
 }
 
 .table tr:nth-of-type(odd) {
@@ -16,4 +18,9 @@
 
 .table td {
   padding: 0.5rem;
+}
+
+.table tbody {
+  display: flex;
+  flex-direction: column;
 }

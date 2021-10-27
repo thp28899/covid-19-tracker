@@ -12,12 +12,30 @@ body {
   padding: 20px;
 }
 
+.app__dropdown {
+  background-color: white;
+}
+
 .app__left {
   flex: 0.7;
 }
 
 .app__right {
-  flex: 0.27;
+  flex: 0.28;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__right__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.app__right__da {
+  display: flex;
+  justify-content: space-between;
 }
 
 .app__header {
@@ -40,4 +58,10 @@ body {
   .app__right {
     margin-top: 20px;
   }
+}
+
+.dataReference {
+  text-align: right;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }

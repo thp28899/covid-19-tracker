@@ -1,24 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-moment';
-// import numeral from 'numeral';
+import './LineGraph.css';
 
-function LineGraph({ casesType }) {
+function LineGraph({ casesType, days }) {
   const [data, setData] = useState([]);
+
+  const colorCasesType =
+    casesType === 'cases'
+      ? '#cc1034'
+      : casesType === 'deaths'
+      ? 'gray'
+      : '#478604';
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=120')
+      await fetch(
+        `https://disease.sh/v3/covid-19/historical/all?lastdays=${days}`
+      )
         .then((response) => response.json())
         .then((data) => {
-          console.log('pppppp', data);
+          // console.log('pppppp', data);
           const chartData = buildChartData(data, casesType);
           setData(chartData);
         });
     };
 
     fetchData();
-  }, [casesType]);
+  }, [casesType, days]);
 
   const buildChartData = (data, casesType) => {
     const chartData = [];
@@ -40,64 +49,21 @@ function LineGraph({ casesType }) {
     return chartData;
   };
 
-  // const options = {
-  //   legend: {
-  //     display: false,
-  //   },
-  //   elements: {
-  //     point: {
-  //       radius: 0,
-  //     },
-  //   },
-  //   maintainAspectRatio: false,
-  //   tooltips: {
-  //     mode: 'index',
-  //     intersect: false,
-  //     callbacks: {
-  //       label: function (tooltipItem) {
-  //         return numeral(tooltipItem.value).format('+0,0');
-  //       },
-  //     },
-  //   },
-  //   scales: {
-  //     xAxes: [
-  //       {
-  //         type: 'time',
-  //         time: {
-  //           format: 'DD/MM/YY',
-  //           tooltipFormat: 'll',
-  //         },
-  //       },
-  //     ],
-  //     yAxes: [
-  //       {
-  //         gridLines: {
-  //           display: false,
-  //         },
-  //         ticks: {
-  //           // include a dollar sign in the ticks
-  //           callback: function (value, index, values) {
-  //             return numeral(value).format('0a');
-  //           },
-  //         },
-  //       },
-  //     ],
-  //   },
-  // };
-
   return (
-    <div>
+    <div className="graph">
       <Line
         data={{
           datasets: [
             {
-              backgroundColor: 'rgba(204, 16, 52, 0.5)',
-              borderColor: '#cc1034',
+              backgroundColor: colorCasesType,
+              borderColor: colorCasesType,
               data: data,
             },
           ],
         }}
         options={{
+          responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: {
               display: false,
