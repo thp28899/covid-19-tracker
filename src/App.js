@@ -182,7 +182,7 @@ function App() {
       </div>
       <div className="dataReference">Data from: <u>https://disease.sh/</u></div>
       <div className="dataReference">Code reference: <u>https://www.youtube.com/watch?v=cF3pIMJUZxM</u></div>
-      <div className="dataReference">Contact me: <u>https://www.linkedin.com/in/phuc-tran-184668224/</u></div>
+      <div className="dataReference">Contact me: <u>https://www.linkedin.com/in/thp28899</u></div>
     </div>
   );
 }
